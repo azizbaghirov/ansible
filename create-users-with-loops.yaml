@@ -1,0 +1,10 @@
+-
+ name: Create users
+ hosts: target1
+ tasks:
+  - user: name={{ item }} state=present
+    loop:
+     - aziz
+     - farah
+     - nijat
+     - samir  

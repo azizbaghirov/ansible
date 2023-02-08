@@ -1,0 +1,21 @@
+-
+ name: Test all modules
+ hosts: target1
+ tasks:
+#  - name: Copy files
+#    copy: src=file-for-node1.txt dest=/root
+#
+#  - name: Restart sshd service
+#    service: name=sshd state=restarted
+#
+#  - name: Execute a script
+#    script: /root/test-project/create-files.sh `{{ firewalld_port }}`
+#
+#  - name: Append a line to file
+#    lineinfile: path=/root/file-for-node1.txt line='nameserver 10.1.250.10'
+
+   - name: Add a firewall port
+     firewalld:
+      port: `{{ firewalld_port }}`/udp
+      permanent: true
+      state: enabled

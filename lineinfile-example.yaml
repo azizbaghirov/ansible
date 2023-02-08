@@ -1,0 +1,6 @@
+-
+ name: Copy
+ hosts: target1
+ tasks:
+  - name: Add a line to target host
+    lineinfile: path=/root/file-for-node1.txt line='This is Good luck!'

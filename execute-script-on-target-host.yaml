@@ -1,0 +1,6 @@
+-
+ name: Copy
+ hosts: target1
+ tasks:
+  - name: Execute script
+    script: /root/test-project/create-files.sh 400

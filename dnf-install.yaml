@@ -1,0 +1,8 @@
+-
+ name: install a package
+ hosts: all
+ tasks:
+   - name: abc
+     dnf:
+       name: vim
+       state: latest
