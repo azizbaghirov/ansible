@@ -1,0 +1,14 @@
+---
+- name: Change user password
+  hosts: heyder_22751
+  become: yes
+
+  vars:
+    new_user_password: 'P@ssw0rd'
+
+  tasks:
+    - name: Change user password
+      user:
+        name: dgadmin
+        update_password: always
+        password: "{{ new_user_password | password_hash('sha512') }}"
