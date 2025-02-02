@@ -1,0 +1,21 @@
+---
+- name: Install package dependent on OS distribution
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: Check distribution
+      ansible.builtin.set_fact:
+        distro: "{{ ansible_distribution }}"
+        
+    - name: Install package on CentOS
+      ansible.builtin.yum:
+        name: my_package
+        state: present
+      when: distro == 'CentOS'
+      
+    - name: Install package on Ubuntu
+      ansible.builtin.apt:
+        name: my_package
+        state: present
+      when: distro == 'Ubuntu'
