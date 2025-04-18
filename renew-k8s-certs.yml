@@ -1,0 +1,21 @@
+---
+- hosts:
+  gather_facts: false
+  vars:
+    - kub_dir: /etc/kubernetes
+  tasks:
+
+    - name: Backup "{{ kub_dir }}" directory
+      shell: cp -rf "{{ kub_dir }}" "{{ kub_dir }}".bak
+
+    - name: Renew certs with kubeadm
+      shell: kubeadm certs renew all
+
+    - name: Restart the pods
+      shell: for i in kube-controller-manager kube-scheduler kube-apiserver; do crictl stop $(crictl ps | grep $i | awk '{print $1}'); done
+
+    - name: Backup old config file
+      shell: cp /root/.kube/config /root/.kube/config.bak
+
+    - name: Copy admin.conf
+      shell: cp  "{{ kub_dir }}"/admin.conf /root/.kube/config
